@@ -1,0 +1,57 @@
+{% extends "orders.html" %}
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-1">
+        </div> 
+        
+        <div class="col">
+            {# #FIXME some elements may cancel out #}
+            {% for item in order_relations %}
+                    
+                    <div class="card border-secondary mb-3 mt-3 ">
+                        <div class="card-header">
+                            <h5>Ordine <span class="badge text-bg-secondary"><strong>No.  {{ item.0.id }}</strong></span></h5>
+                            <h6><strong>{{ item.0.timestamp }}</strong></h6>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped border">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Misura/Modello</th>
+                                    <th scope="col">Marca</th>
+                                    <th scope="col">Quantità all'ordine</th>
+                                    <th scope="col">Prezzo all'ordine</th>
+                                    <th scope="col">Stato</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for relation in item.1 %}
+                                <tr>
+                                    <td>{{ relation.product.width }}/{{ relation.product.article }}</td>
+                                    <td>{{ relation.product.brand }}</td>
+                                    <td>{{ relation.product_quantity }}</td>
+                                    <td>{{ relation.product_price_adjusted }}</td>
+                                    <td>Creato</td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer">
+                            <h6>Subtotale: {{ item.0.get_subtotal_adjusted }}</h6>
+                        </div>
+
+                    </div>
+                    
+            {% endfor %}
+  
+        </div>
+        
+        <div class="col-1">
+        </div>
+    </div>  
+    
+{% endblock %}

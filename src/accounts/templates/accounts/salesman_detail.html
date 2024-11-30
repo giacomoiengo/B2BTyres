@@ -1,0 +1,32 @@
+{% extends "supervisor.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-4">
+        <table class="table table-striped border">
+            <tbody>
+                <tr>
+                    <th scope="col">Nome utente</th>
+                    <td scope="col">{{ object.account.username }}</td>
+                </tr>
+                
+                <tr>
+                    <th scope="col">Email</th>
+                    <td scope="col">{{ object.account.email }}</td>
+                </tr>
+                <tr>
+                    <th scope="col">Supervisore associato</th>
+                    <td scope="col">{{ object.supervisor.account.username }}</td>
+                </tr>
+                <tr>
+                    <th scope="col">Città</th>
+                    <td scope="col">{{ object.city }}</td>
+                </tr>
+            </tbody>
+          </table>
+    </div>
+    <div class="col">
+    </div>
+</div>
+
+{% endblock %}

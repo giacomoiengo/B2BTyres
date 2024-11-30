@@ -1,0 +1,20 @@
+{% extends "supervisor.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col">    
+        <table class="table table-striped border">
+            <thead>
+                <th scope="col">Clienti</th>
+            </thead>
+            {% for customer in object_list %}
+            <tr>
+                <td><a href="{% url 'customer_detail_from_supervisor' customer.pk %}"> {{ customer.account.username }} </a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col-1"></div>
+</div>
+{% endblock %}

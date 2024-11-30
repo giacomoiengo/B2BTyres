@@ -1,0 +1,23 @@
+{% extends "supervisor.html" %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col">
+        <form method="post">
+            {% csrf_token %}
+            {{ account_form|crispy }}
+            {{ salesman_form|crispy }}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <div class="col-1"></div>
+</div>
+
+
+
+
+{% endblock %}

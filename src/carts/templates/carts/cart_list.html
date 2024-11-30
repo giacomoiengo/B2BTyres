@@ -1,0 +1,85 @@
+{% extends "carts.html" %}
+
+{% load carts_extra %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-1">
+        </div> 
+        
+        <div class="col">
+          
+              <div class="card mb-3 mt-3 ">
+                <div class="card-header">
+                    <h6>Prodotti nel carrello: {{ cart_product.count }}</h6>
+                </div>
+                <div class="card-body">
+                  {% if cart_product.count > 0 %}
+                  <table class="table table-striped border">
+                    <thead>
+                      <tr>
+                        <th scope="col">Misura/Modello</th>
+                        <th scope="col">Marca</th>
+                        <th scope="col">Quantità</th>
+                        <th scope="col">Prezzo</th>
+                        <th scope="col">Elimina</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for relation in cart_product %}
+                      <tr>
+                        <td>{{ relation.product.width }}/{{ relation.product.article }}</td>
+                        <td>{{ relation.product.brand }}</td>
+                        <td>{{ relation.quantity }}</td>
+                        <td>{% call_method relation.product 'adjust_price' cart.customer %}</td>
+                        <td><a class="btn btn-outline-danger btn-sm" href="{% url 'cart_delete_product' page_number relation.product.pk %}" role="button">Elimina</a></td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  {% endif %}
+                </div>
+                <div class="card-footer">
+                    <h6>Subtotale: {{ cart.get_subtotal }}</h6>
+                </div>
+
+            </div>
+
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" {% if cart_product.count <= 0 %} disabled {% endif %}>
+              Ordina
+            </button>                
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ordinare?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Vuoi creare l'ordine? Questo svuoterà il tuo carrello.
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                    <form action="{% url 'order_add' %}" method="POST">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-primary">Ordina</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+          
+
+
+
+
+
+  
+        </div>
+        
+        <div class="col-1">
+        </div>
+    </div>  
+    
+{% endblock %}

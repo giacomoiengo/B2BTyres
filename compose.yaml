@@ -1,0 +1,28 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DATABASE_NAME=b2b
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+
+  db:
+    image: postgres:14
+    environment:
+      - POSTGRES_DB=b2b
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "5432:5432"

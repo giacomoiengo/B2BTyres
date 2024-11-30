@@ -1,0 +1,32 @@
+{% extends "supervisor.html" %}
+
+
+
+{% block content %}
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col">
+        
+        <a class="btn btn-outline-primary mt-2 mb-2" href="{% url 'salesman_create'%}" role="button">Aggiungi Rappresentante</a>
+        
+        <table class="table table-striped border">
+            <thead>
+                <th scope="col">Rappresentanti</th>
+                <th scope="col">Lista clienti</th>
+                <th scope="col">Modifica</th>
+                <th scope="col">Elimina</th>
+            </thead>
+            {% for salesman in object_list %}
+            <tr>
+                
+                <td><a href="{% url 'salesman_detail' salesman.pk %}">{{ salesman.account.username }}</a></td>
+                <td><a class="btn btn-outline-primary btn-sm" href="{% url 'customer_list_on_salesman_behalf' salesman.pk %}" role="button">Clienti</a></td>
+                <td><a class="btn btn-outline-primary btn-sm" href="{% url 'salesman_update' salesman.pk %}" role="button">Modifica</a></td>
+                <td><a class="btn btn-outline-danger btn-sm" href="{% url 'salesman_delete' salesman.pk %}" role="button">Elimina</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col-1"></div>
+</div>
+{% endblock %}

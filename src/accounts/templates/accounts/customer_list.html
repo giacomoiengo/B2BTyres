@@ -1,0 +1,30 @@
+{% extends "salesman.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col">
+        
+        <a class="btn btn-outline-primary mt-2 mb-2" href="{% url 'customer_create'%}" role="button">Aggiungi Cliente</a>
+        
+        <table class="table table-striped border">
+            <thead>
+                <th scope="col">Clienti</th>
+                <th scope="col">Lista ordini</th>
+                <th scope="col">Modifica</th>
+                <th scope="col">Elimina</th>
+            </thead>
+            {% for customer in object_list %}
+            <tr>
+                
+                <td><a href="{% url 'customer_detail' customer.pk %}">{{ customer.account.username }}</a></td>
+                <td><a class="btn btn-outline-primary btn-sm disabled" href="" role="button">Ordini (Non ancora implementato)</a></td>
+                <td><a class="btn btn-outline-primary btn-sm" href="{% url 'customer_update' customer.pk %}" role="button">Modifica</a></td>
+                <td><a class="btn btn-outline-danger btn-sm" href="{% url 'customer_delete' customer.pk %}" role="button">Elimina</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col-1"></div>
+</div>
+{% endblock %}

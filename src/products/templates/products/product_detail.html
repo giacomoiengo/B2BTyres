@@ -1,0 +1,85 @@
+{% extends "products.html" %}
+
+{% load products_extra %}
+{% block content %}
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+
+
+            <a class="btn btn-outline-primary mb-2" href="{% url 'product_list' page_number %}" role="button">Torna indietro</a>
+
+            <table class="table table-striped table-bordered">
+                <tbody>
+                    <tr>
+                        <th scope="col">Codice</th>
+                        <td scope="col">{{ product.article }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Marca</th>
+                        <td scope="col">{{ product.brand }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Larghezza</th>
+                        <td scope="col">{{ product.width }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Altezza</th>
+                        <td scope="col">{{ product.height }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Velocità</th>
+                        <td scope="col">{{ product.speed }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Rim</th>
+                        <td scope="col">{{ product.rim }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Indice di carico</th>
+                        <td scope="col">{{ product.load_index }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Tipo</th>
+                        <td scope="col">{{ product.quality }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Veicolo</th>
+                        <td scope="col">{{ product.vehicle }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Quantità</th>
+                        <td scope="col">{{ product.stock }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Prezzo</th>
+                        <td scope="col">{% call_method product 'adjust_price' customer %}</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Efficienza consumi</th>
+                        <td scope="col">{{ product.discount }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Sconto fornitore</th>
+                        <td scope="col">{{ product.discount }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Aderenza bagnato</th>
+                        <td scope="col">{{ product.wet }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Rumorosià</th>
+                        <td scope="col">{{ product.noise }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-2"></div>
+        
+
+    </div>
+    
+
+
+
+{% endblock %}
